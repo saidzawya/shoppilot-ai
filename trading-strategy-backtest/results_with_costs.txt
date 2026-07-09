@@ -4,6 +4,7 @@
   2026-06-10 LONG  SL    entry 4196.70 sl 4192.50 tp 4245.50 pnl   -4.70 (-1.12R) exit@10:15
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4133.60 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  SL    entry 4206.70 sl 4202.70 tp 4249.60 pnl   -4.50 (-1.12R) exit@10:32
+  2026-06-15 LONG  NO_TARGET
   2026-06-16 SHORT SL    entry 4357.80 sl 4359.80 tp 4334.20 pnl   -2.50 (-1.25R) exit@10:04
   2026-06-17 LONG  NO_TARGET
   2026-06-18 SHORT TP    entry 4261.60 sl 4277.80 tp 4257.89 pnl   +3.21 (+0.20R) exit@10:04
@@ -26,6 +27,7 @@
   2026-06-10 LONG  SL    entry 4196.70 sl 4192.50 tp 4245.50 pnl   -4.70 (-1.12R) exit@10:15
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4133.60 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  FILTERED_INSIDE_BOX
+  2026-06-15 LONG  FILTERED_INSIDE_BOX
   2026-06-16 SHORT FILTERED_INSIDE_BOX
   2026-06-17 LONG  NO_TARGET
   2026-06-18 SHORT TP    entry 4261.60 sl 4277.80 tp 4257.89 pnl   +3.21 (+0.20R) exit@10:04
@@ -48,6 +50,7 @@
   2026-06-10 LONG  TP    entry 4196.70 sl 4192.50 tp 4200.90 pnl   +3.70 (+0.88R) exit@10:11
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4117.90 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  TP    entry 4206.70 sl 4202.70 tp 4210.70 pnl   +3.50 (+0.88R) exit@10:00
+  2026-06-15 LONG  TP    entry 4382.00 sl 4380.20 tp 4383.80 pnl   +1.30 (+0.72R) exit@10:54
   2026-06-16 SHORT TP    entry 4357.80 sl 4359.80 tp 4355.80 pnl   +1.50 (+0.75R) exit@10:03
   2026-06-17 LONG  TP    entry 4361.50 sl 4358.50 tp 4364.50 pnl   +2.50 (+0.83R) exit@09:48
   2026-06-18 SHORT TP    entry 4261.60 sl 4277.80 tp 4245.40 pnl  +15.70 (+0.97R) exit@11:30
@@ -63,13 +66,14 @@
   2026-07-06 SHORT TP    entry 4156.50 sl 4160.00 tp 4153.00 pnl   +3.00 (+0.86R) exit@10:04
   2026-07-07 LONG  SL    entry 4166.80 sl 4163.70 tp 4169.90 pnl   -3.60 (-1.16R) exit@10:08
   2026-07-08 SHORT TP    entry 4076.60 sl 4080.60 tp 4072.60 pnl   +3.50 (+0.88R) exit@10:07
-  trades 19  wins 11  losses 8  winrate 58%  totalR +0.56  total$ +24.30
+  trades 20  wins 12  losses 8  winrate 60%  totalR +1.29  total$ +25.60
 
 == strict_box=False tp_mode=rr rr=2 ==
   2026-06-09 LONG  SL    entry 4362.50 sl 4359.00 tp 4369.50 pnl   -4.00 (-1.14R) exit@09:54
   2026-06-10 LONG  SL    entry 4196.70 sl 4192.50 tp 4205.10 pnl   -4.70 (-1.12R) exit@10:15
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4124.70 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  TP    entry 4206.70 sl 4202.70 tp 4214.70 pnl   +7.50 (+1.88R) exit@10:01
+  2026-06-15 LONG  SL    entry 4382.00 sl 4380.20 tp 4385.60 pnl   -2.30 (-1.28R) exit@10:58
   2026-06-16 SHORT SL    entry 4357.80 sl 4359.80 tp 4353.80 pnl   -2.50 (-1.25R) exit@10:04
   2026-06-17 LONG  SL    entry 4361.50 sl 4358.50 tp 4367.50 pnl   -3.50 (-1.17R) exit@10:00
   2026-06-18 SHORT TP    entry 4261.60 sl 4277.80 tp 4229.20 pnl  +31.90 (+1.97R) exit@15:05
@@ -85,13 +89,14 @@
   2026-07-06 SHORT TP    entry 4156.50 sl 4160.00 tp 4149.50 pnl   +6.50 (+1.86R) exit@10:07
   2026-07-07 LONG  SL    entry 4166.80 sl 4163.70 tp 4173.00 pnl   -3.60 (-1.16R) exit@10:08
   2026-07-08 SHORT TP    entry 4076.60 sl 4080.60 tp 4068.60 pnl   +7.50 (+1.88R) exit@10:14
-  trades 19  wins 7  losses 12  winrate 37%  totalR -0.44  total$ +19.00
+  trades 20  wins 7  losses 13  winrate 35%  totalR -1.71  total$ +16.70
 
 == strict_box=False tp_mode=rr rr=3 ==
   2026-06-09 LONG  SL    entry 4362.50 sl 4359.00 tp 4373.00 pnl   -4.00 (-1.14R) exit@09:54
   2026-06-10 LONG  SL    entry 4196.70 sl 4192.50 tp 4209.30 pnl   -4.70 (-1.12R) exit@10:15
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4131.50 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  TP    entry 4206.70 sl 4202.70 tp 4218.70 pnl  +11.50 (+2.88R) exit@10:01
+  2026-06-15 LONG  SL    entry 4382.00 sl 4380.20 tp 4387.40 pnl   -2.30 (-1.28R) exit@10:58
   2026-06-16 SHORT SL    entry 4357.80 sl 4359.80 tp 4351.80 pnl   -2.50 (-1.25R) exit@10:04
   2026-06-17 LONG  SL    entry 4361.50 sl 4358.50 tp 4370.50 pnl   -3.50 (-1.17R) exit@10:00
   2026-06-18 SHORT OPEN  entry 4261.60 sl 4277.80 tp 4213.00 pnl  +24.90 (+1.54R) exit@15:55
@@ -107,13 +112,14 @@
   2026-07-06 SHORT TP    entry 4156.50 sl 4160.00 tp 4146.00 pnl  +10.00 (+2.86R) exit@10:07
   2026-07-07 LONG  SL    entry 4166.80 sl 4163.70 tp 4176.10 pnl   -3.60 (-1.16R) exit@10:08
   2026-07-08 SHORT TP    entry 4076.60 sl 4080.60 tp 4064.60 pnl  +11.50 (+2.88R) exit@10:16
-  trades 19  wins 6  losses 13  winrate 32%  totalR +1.13  total$ -9.30
+  trades 20  wins 6  losses 14  winrate 30%  totalR -0.15  total$ -11.60
 
 == strict_box=True tp_mode=rr rr=1 ==
   2026-06-09 LONG  SL    entry 4362.50 sl 4359.00 tp 4366.00 pnl   -4.00 (-1.14R) exit@09:54
   2026-06-10 LONG  TP    entry 4196.70 sl 4192.50 tp 4200.90 pnl   +3.70 (+0.88R) exit@10:11
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4117.90 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  FILTERED_INSIDE_BOX
+  2026-06-15 LONG  FILTERED_INSIDE_BOX
   2026-06-16 SHORT FILTERED_INSIDE_BOX
   2026-06-17 LONG  TP    entry 4361.50 sl 4358.50 tp 4364.50 pnl   +2.50 (+0.83R) exit@09:48
   2026-06-18 SHORT TP    entry 4261.60 sl 4277.80 tp 4245.40 pnl  +15.70 (+0.97R) exit@11:30
@@ -136,6 +142,7 @@
   2026-06-10 LONG  SL    entry 4196.70 sl 4192.50 tp 4205.10 pnl   -4.70 (-1.12R) exit@10:15
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4124.70 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  FILTERED_INSIDE_BOX
+  2026-06-15 LONG  FILTERED_INSIDE_BOX
   2026-06-16 SHORT FILTERED_INSIDE_BOX
   2026-06-17 LONG  SL    entry 4361.50 sl 4358.50 tp 4367.50 pnl   -3.50 (-1.17R) exit@10:00
   2026-06-18 SHORT TP    entry 4261.60 sl 4277.80 tp 4229.20 pnl  +31.90 (+1.97R) exit@15:05
@@ -158,6 +165,7 @@
   2026-06-10 LONG  SL    entry 4196.70 sl 4192.50 tp 4209.30 pnl   -4.70 (-1.12R) exit@10:15
   2026-06-11 LONG  SL    entry 4111.10 sl 4104.30 tp 4131.50 pnl   -7.30 (-1.07R) exit@09:59
   2026-06-12 LONG  FILTERED_INSIDE_BOX
+  2026-06-15 LONG  FILTERED_INSIDE_BOX
   2026-06-16 SHORT FILTERED_INSIDE_BOX
   2026-06-17 LONG  SL    entry 4361.50 sl 4358.50 tp 4370.50 pnl   -3.50 (-1.17R) exit@10:00
   2026-06-18 SHORT OPEN  entry 4261.60 sl 4277.80 tp 4213.00 pnl  +24.90 (+1.54R) exit@15:55

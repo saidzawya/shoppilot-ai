@@ -54,7 +54,10 @@ def is_hammer(o, h, l, c, direction):
         lower = min(o, c) - l
         return upper >= 2 * body and upper >= 0.5 * rng and lower <= 0.3 * rng
 
-def detect_entry(bars1m, open_epoch, bo_cap_min=60, hammer_window_min=30):
+def detect_entry(bars1m, open_epoch):
+    """No time limits: the first 5m candle (2nd, 3rd, ... any) whose body
+    closes outside the box arms the direction; then the first 1m hammer at
+    any later time triggers entry — exactly as the strategy author states."""
     b5 = resample(bars1m, 300)
     box = next((b for b in b5 if b[0] == open_epoch), None)
     if box is None:
@@ -63,7 +66,7 @@ def detect_entry(bars1m, open_epoch, bo_cap_min=60, hammer_window_min=30):
     bo = None
     for b in b5:
         t, o, h, l, c = b
-        if t <= open_epoch or t > open_epoch + bo_cap_min * 60:
+        if t <= open_epoch:
             continue
         if c > box_hi:
             bo = ("LONG", t + 300, c)
@@ -74,11 +77,10 @@ def detect_entry(bars1m, open_epoch, bo_cap_min=60, hammer_window_min=30):
     if bo is None:
         return {"result": "NO_BREAKOUT", "box": (box_hi, box_lo)}
     side, bo_close_t, bo_close = bo
-    # hammer scan on 1m bars after the breakout candle closes
-    idx = {b[0]: i for i, b in enumerate(bars1m)}
+    # hammer scan on 1m bars after the breakout candle closes (no deadline)
     for i, b in enumerate(bars1m):
         t, o, h, l, c = b
-        if t < bo_close_t or t >= bo_close_t + hammer_window_min * 60:
+        if t < bo_close_t:
             continue
         if is_hammer(o, h, l, c, side):
             look = bars1m[max(0, i - 4):i + 1]
