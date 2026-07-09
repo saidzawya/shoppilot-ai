@@ -55,9 +55,13 @@ def is_hammer(o, h, l, c, direction):
         return upper >= 2 * body and upper >= 0.5 * rng and lower <= 0.3 * rng
 
 def detect_entry(bars1m, open_epoch):
-    """No time limits: the first 5m candle (2nd, 3rd, ... any) whose body
-    closes outside the box arms the direction; then the first 1m hammer at
-    any later time triggers entry — exactly as the strategy author states."""
+    """Exactly as the strategy author states, no time limits:
+    1) first 5m candle (2nd, 3rd, ... any) whose body closes outside the
+       box arms the direction;
+    2) REQUIRED: price must first RETURN to the box (retest) — for a long,
+       trade back down to the box top; for a short, back up to the box
+       bottom — before moving to the 1m chart;
+    3) after the retest, the first 1m hammer triggers the entry."""
     b5 = resample(bars1m, 300)
     box = next((b for b in b5 if b[0] == open_epoch), None)
     if box is None:
@@ -77,11 +81,19 @@ def detect_entry(bars1m, open_epoch):
     if bo is None:
         return {"result": "NO_BREAKOUT", "box": (box_hi, box_lo)}
     side, bo_close_t, bo_close = bo
-    # hammer scan on 1m bars after the breakout candle closes (no deadline)
+    retest = False
+    retest_t = None
     for i, b in enumerate(bars1m):
         t, o, h, l, c = b
         if t < bo_close_t:
             continue
+        if not retest:
+            if (side == "LONG" and l <= box_hi) or (side == "SHORT" and h >= box_lo):
+                retest = True
+                retest_t = t
+            else:
+                continue
+        # hammer may be the retest bar itself or any later bar
         if is_hammer(o, h, l, c, side):
             look = bars1m[max(0, i - 4):i + 1]
             if side == "LONG":
@@ -89,10 +101,13 @@ def detect_entry(bars1m, open_epoch):
             else:
                 sl = max(x[2] for x in look) + 0.5
             return {"result": "ENTRY", "side": side, "box": (box_hi, box_lo),
-                    "bo_close_t": bo_close_t, "entry_t": t + 60,
-                    "entry": c, "sl": sl, "hammer_i": i}
+                    "bo_close_t": bo_close_t, "retest_t": retest_t,
+                    "entry_t": t + 60, "entry": c, "sl": sl, "hammer_i": i}
+    if not retest:
+        return {"result": "NO_RETEST", "side": side, "box": (box_hi, box_lo),
+                "bo_close_t": bo_close_t}
     return {"result": "NO_HAMMER", "side": side, "box": (box_hi, box_lo),
-            "bo_close_t": bo_close_t}
+            "bo_close_t": bo_close_t, "retest_t": retest_t}
 
 def fmt_et(epoch):
     # EDT = UTC-4
@@ -153,9 +168,11 @@ def run(strict_box=True, tp_mode="liquidity", rr=None, quiet=False):
             tp = entry + rr * risk if side == "LONG" else entry - rr * risk
         # path: rest of 1m bars, then 5m tail if available
         path_bars = [b for b in bars if b[0] >= r["entry_t"]]
+        last_1m = path_bars[-1][0] if path_bars else 0
         tail_path = f"data/5m_tail_{date}.csv"
         if os.path.exists(tail_path):
-            path_bars += [b for b in load_csv(tail_path) if b[0] >= r["entry_t"]]
+            path_bars += [b for b in load_csv(tail_path)
+                          if b[0] >= r["entry_t"] and b[0] > last_1m]
         outcome, exit_p, exit_t, amb = simulate(side, entry, sl, tp, path_bars)
         pnl = (exit_p - entry) if side == "LONG" else (entry - exit_p)
         pnl -= 2 * COST  # round-trip cost
@@ -197,9 +214,7 @@ if __name__ == "__main__":
             elif r:
                 print(f"{date}: {r['result']} ({r.get('side','-')})")
     else:
+        # retest requirement is built into detect_entry; no extra filters
         run(strict_box=False, tp_mode="liquidity")
-        run(strict_box=True, tp_mode="liquidity")
         for rr in (1, 2, 3):
             run(strict_box=False, tp_mode="rr", rr=rr)
-        for rr in (1, 2, 3):
-            run(strict_box=True, tp_mode="rr", rr=rr)
